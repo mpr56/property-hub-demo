@@ -1,0 +1,313 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: #05070f;
+  color: rgba(255, 255, 255, 0.92);
+  font-family: var(--font-body), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display), var(--font-body), sans-serif;
+  letter-spacing: -0.02em;
+}
+
+::selection { background: rgba(62, 182, 240, 0.35); }
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.14); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.24); }
+::-webkit-scrollbar-track { background: transparent; }
+
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; }
+input, select, textarea { font-family: inherit; }
+
+input::placeholder, textarea::placeholder { color: rgba(255, 255, 255, 0.3); }
+
+/* Inline styles set the resting border/background, so focus needs !important to win. */
+input:not([type='checkbox']):focus,
+select:focus,
+textarea:focus {
+  border-color: rgba(124, 205, 246, 0.55) !important;
+  background-color: rgba(62, 182, 240, 0.07) !important;
+  outline: none;
+}
+
+*:focus-visible {
+  outline: 2px solid #7ccdf6;
+  outline-offset: 2px;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(248, 113, 113, 0.3); }
+  50%      { box-shadow: 0 0 0 8px rgba(248, 113, 113, 0); }
+}
+@keyframes drift {
+  0%   { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(2%, -3%) scale(1.05); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px) scale(0.985); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ── Interactive state classes (hover can't be expressed inline) ───────── */
+/* Hover rules live behind (hover: hover) so touch devices don't get stuck
+   in the hover state after a tap. */
+
+.btn-primary { transition: filter 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease; }
+.btn-primary:active:not(:disabled) { transform: translateY(1px); }
+.btn-ghost { transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease; }
+.icon-btn { transition: background-color 0.2s ease, color 0.2s ease; }
+.menu-item { transition: background-color 0.15s ease; }
+.tab-btn { transition: color 0.2s ease, background-color 0.2s ease; }
+.row-btn { transition: background-color 0.15s ease; border-radius: 10px; }
+.check-row { transition: background-color 0.15s ease, color 0.15s ease; }
+
+.property-card {
+  transition: transform 0.18s ease, border-color 0.18s ease, background-color 0.18s ease, box-shadow 0.18s ease;
+}
+.stat-card { transition: transform 0.18s ease, border-color 0.18s ease; }
+
+@media (hover: hover) {
+  .btn-primary:hover:not(:disabled) {
+    filter: brightness(1.12);
+    box-shadow: 0 6px 24px rgba(62, 182, 240, 0.45) !important;
+  }
+  .btn-ghost:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-color: rgba(255, 255, 255, 0.28) !important;
+    color: #fff !important;
+  }
+  .icon-btn:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: #fff !important;
+  }
+  .menu-item:hover { background: rgba(255, 255, 255, 0.08); }
+  .tab-btn:hover { color: #fff !important; }
+  .row-btn:hover { background: rgba(255, 255, 255, 0.05) !important; }
+  .check-row:hover { background: rgba(255, 255, 255, 0.07) !important; color: #fff !important; }
+  .property-card:hover {
+    transform: translateY(-2px);
+    background-color: rgba(255, 255, 255, 0.075) !important;
+    border-color: rgba(124, 205, 246, 0.35) !important;
+    box-shadow: 0 16px 48px rgba(2, 8, 24, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+  }
+  .stat-card:hover { transform: translateY(-2px); border-color: rgba(255, 255, 255, 0.18) !important; }
+}
+
+/* ── Page shell ─────────────────────────────────────────────────────────── */
+
+.page-inner {
+  padding-left: max(24px, env(safe-area-inset-left));
+  padding-right: max(24px, env(safe-area-inset-right));
+}
+
+.attribute-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+/* Dashboard stat tiles: a single row of four on desktop, folding to a clean
+   2×2 on phones/tablet (never an orphaned 3+1 row). */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.tabs-only { display: block; }
+.accordion-only { display: none; }
+
+/* ── Tasks: featured list beside the main list (stacks on mobile) ────────── */
+.tasks-split { display: flex; gap: 0; align-items: stretch; }
+.tasks-split > * { min-width: 0; }
+
+/* Drag handle sitting between the two panels — grab it to make one panel wider
+   than the other. Hidden (and ignored) once the panels stack on mobile. */
+.tasks-divider {
+  flex: 0 0 auto;
+  align-self: stretch;
+  width: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: col-resize;
+  touch-action: none;
+}
+.tasks-divider-grip {
+  width: 4px;
+  height: 44px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  transition: background 0.15s ease, height 0.15s ease;
+}
+.tasks-divider:hover .tasks-divider-grip { background: rgba(255, 255, 255, 0.34); height: 64px; }
+
+/* ── Property card layout ───────────────────────────────────────────────── */
+
+.pc-grid {
+  padding: 16px 20px;
+  display: grid;
+  grid-template-columns: 4px 1fr auto;
+  column-gap: 16px;
+  row-gap: 8px;
+}
+.pc-stripe { grid-row: 1 / 4; }
+.pc-address {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: center;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pc-cats { grid-column: 3; grid-row: 1; align-self: center; display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end; }
+.pc-meta { grid-column: 2; grid-row: 2; }
+.pc-level { grid-column: 3; grid-row: 2; justify-self: end; }
+.pc-trackers { grid-column: 2 / 4; grid-row: 3; }
+/* Every pill row wraps on the same rhythm so nothing sits ragged. */
+.pc-cats, .pc-meta, .pc-trackers { align-items: center; row-gap: 6px; }
+
+/* ── Modal sheet (desktop: centered dialog / mobile: bottom sheet) ──────── */
+
+.sheet-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(3, 5, 12, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  /* Touch drags on the backdrop must not scroll anything behind the sheet */
+  touch-action: none;
+  overscroll-behavior: contain;
+}
+.sheet-panel { width: 100%; max-width: 460px; animation: fadeUp 0.22s ease; }
+.sheet-card {
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100dvh - 40px);
+  border-radius: 20px;
+  background: linear-gradient(180deg, #0e1526 0%, #0a1020 100%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+.sheet-body {
+  padding: 20px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  /* Vertical pan only, and don't chain the scroll to the page behind when
+     hitting the top/bottom of the sheet's content. */
+  touch-action: pan-y;
+  overscroll-behavior: contain;
+}
+
+@keyframes sheetUp {
+  from { opacity: 0.4; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Modal form rows: two columns on desktop, stacked on small phones ───── */
+
+.field-row { display: flex; gap: 10px; }
+
+/* ── Mobile ─────────────────────────────────────────────────────────────── */
+
+@media (max-width: 720px) {
+  .page-inner {
+    padding-left: max(16px, env(safe-area-inset-left));
+    padding-right: max(16px, env(safe-area-inset-right));
+  }
+
+  .attribute-grid { grid-template-columns: 1fr; }
+  .stat-grid { grid-template-columns: repeat(2, 1fr); }
+  /* !important: the desktop tab bar sets display:flex inline, which would
+     otherwise beat this rule and render tabs and accordion together. */
+  .tabs-only { display: none !important; }
+  .accordion-only { display: block; }
+
+  /* Property card: single column. Every element stacks left-aligned on the
+     same grid edge (col 2) so all the tag rows line up flush. */
+  .pc-grid { padding: 14px 16px; grid-template-columns: 4px 1fr; column-gap: 12px; row-gap: 10px; }
+  .pc-stripe { grid-row: 1 / 6; }
+  .pc-address { grid-column: 2; grid-row: 1; white-space: normal; overflow: visible; }
+  .pc-meta   { grid-column: 2; grid-row: 2; }
+  .pc-level  { grid-column: 2; grid-row: 3; justify-self: start; }
+  .pc-cats   { grid-column: 2; grid-row: 4; justify-content: flex-start; }
+  .pc-trackers { grid-column: 2; grid-row: 5; }
+
+  /* Dashboard header actions + filter bar stretch edge-to-edge */
+  .header-actions { width: 100%; }
+  .header-actions > * { flex: 1; }
+  .header-actions .btn-primary, .header-actions .btn-ghost { width: 100%; }
+  .filter-search { flex-basis: 100% !important; }
+  /* Wide enough that the two selects pair up and the view toggle wraps to its
+     own line, instead of all three crushing onto one row. */
+  .filter-bar select { flex: 1 1 140px; min-width: 0; }
+
+  /* Right-anchored under a stretched action button the menu would run off the
+     left edge of the screen — anchor it left instead. */
+  .export-pop { left: 0; right: auto !important; max-width: calc(100vw - 32px); }
+
+  /* Filter footer: sort select + reset each take a full row for easy tapping. */
+  .filter-foot { flex-direction: column; align-items: stretch !important; }
+  .filter-foot select { width: 100%; }
+
+  /* Tasks: the featured panel stacks full-width above the main list on phones;
+     the drag handle is desktop-only. */
+  .tasks-split { flex-direction: column; gap: 12px; }
+  .tasks-divider { display: none; }
+}
+
+@media (max-width: 640px) {
+  /* Bottom sheet: slides up, full width, respects the home-indicator inset */
+  .sheet-overlay { align-items: flex-end; padding: 0; }
+  .sheet-panel { max-width: none; animation: sheetUp 0.26s ease; }
+  .sheet-card {
+    max-height: 92dvh;
+    border-radius: 20px 20px 0 0;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+  }
+  .sheet-body { padding: 16px 16px calc(20px + env(safe-area-inset-bottom)); }
+}
+
+@media (max-width: 480px) {
+  .field-row { flex-direction: column; }
+}
+
+/* iOS Safari zooms the page when a focused input's font is under 16px —
+   bump form controls to 16px on phones so focusing never zooms. */
+@media (max-width: 767px) {
+  input:not([type='checkbox']),
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+}
+
+/* Bigger tap targets on touch devices */
+@media (pointer: coarse) {
+  .btn-primary, .btn-ghost { min-height: 40px; }
+  .icon-btn { min-width: 38px; min-height: 38px; }
+  .tab-btn, .row-btn { min-height: 44px; }
+  input[type='checkbox'] { width: 18px !important; height: 18px !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+}
