@@ -146,7 +146,7 @@ export default function EditPropertyModal({ open, onClose, cfg, onSaved }: Props
         <div>
           <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 12.5, color: 'rgba(255,255,255,0.7)', cursor: 'pointer' }}>
             <input type="checkbox" checked={ratesExternalBill} onChange={e => setRatesExternalBill(e.target.checked)} />
-            No rates notice of its own — billed under another property
+            No rates notice of its own; billed under another property
           </label>
           {ratesExternalBill && (
             <input
@@ -161,7 +161,7 @@ export default function EditPropertyModal({ open, onClose, cfg, onSaved }: Props
         <div>
           <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 12.5, color: 'rgba(255,255,255,0.7)', cursor: 'pointer' }}>
             <input type="checkbox" checked={waterExternalBill} onChange={e => setWaterExternalBill(e.target.checked)} />
-            No water bill of its own — billed under another property
+            No water bill of its own; billed under another property
           </label>
           {waterExternalBill && (
             <input

@@ -73,14 +73,14 @@ export function describe(cfg: PropertyConfig): string {
   const rent = latest.rent != null ? ` · $${latest.rent.toLocaleString()}/wk` : '';
   if (!latest.endDate) {
     return latest.startDate
-      ? `Since ${formatDate(latest.startDate)} — no end date${rent}`
+      ? `Since ${formatDate(latest.startDate)}, no end date${rent}`
       : `No end date set${rent}`;
   }
   const days = daysUntil(latest.endDate);
   if (days < 0) return `Lease expired ${formatDate(latest.endDate)} (${-days}d ago)${rent}`;
   if (days === 0) return `Lease ends today${rent}`;
   const level = computeAlertLevel(cfg);
-  if (level === 'missing') return `Lease ends ${formatDate(latest.endDate)} (in ${days}d) — renewal needed${rent}`;
+  if (level === 'missing') return `Lease ends ${formatDate(latest.endDate)} (in ${days}d), renewal needed${rent}`;
   if (level === 'due-soon') return `Lease ends ${formatDate(latest.endDate)} (in ${days}d)${rent}`;
   return `Leased to ${formatDate(latest.endDate)}${rent}`;
 }

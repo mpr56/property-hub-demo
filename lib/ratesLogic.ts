@@ -30,13 +30,13 @@ export function entryStatus(entry: WorkflowEntry, category: Category): EntryStat
   if (entry.paid) return { label: 'Paid', hex: color.green };
 
   if (category === 'green') {
-    if (entry.dateForwarded) return { label: 'Forwarded — awaiting payment', hex: color.orange };
-    if (entry.dateReceived) return { label: 'Received — not forwarded', hex: color.red };
+    if (entry.dateForwarded) return { label: 'Forwarded, awaiting payment', hex: color.orange };
+    if (entry.dateReceived) return { label: 'Received, not forwarded', hex: color.red };
     return { label: 'Not received yet', hex: color.red };
   }
 
   if (category === 'orange') {
-    if (entry.dateChecked) return { label: 'Checked — awaiting confirmation', hex: color.orange };
+    if (entry.dateChecked) return { label: 'Checked, awaiting confirmation', hex: color.orange };
     return { label: 'Not checked yet', hex: color.red };
   }
 

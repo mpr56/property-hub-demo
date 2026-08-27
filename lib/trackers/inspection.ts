@@ -56,7 +56,7 @@ export function makeInspectionTracker(
     const d = data(cfg);
     const latest = d ? latestByDueDate(d.entries) : null;
     if (!latest) return `No ${label.toLowerCase()} logged`;
-    if (latest.result === 'fail') return 'Failed — needs attention';
+    if (latest.result === 'fail') return 'Failed, needs attention';
     if (latest.result === 'pass') return 'Passed';
     const dueLabel = formatDueLabel(latest.dueDate, false);
     return dueLabel ?? 'Pending';

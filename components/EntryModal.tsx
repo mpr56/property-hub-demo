@@ -169,7 +169,7 @@ export default function EntryModal({ open, onClose, cfg, trackerType, mode, entr
     }
   }
 
-  const title = `${isEdit ? 'Update' : 'Add'} — ${trackerLabel(trackerType)}`;
+  const title = `${isEdit ? 'Update' : 'Add'} ${trackerLabel(trackerType)}`;
 
   return (
     <Sheet open={open} onClose={onClose} title={title}>

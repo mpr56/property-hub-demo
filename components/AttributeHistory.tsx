@@ -62,7 +62,7 @@ export default function AttributeHistory({ cfg, activeTab, onActiveTabChange, on
       </div>
       <div className="tabs-only" style={{ padding: '4px 18px 18px' }}>
         <p style={{ fontSize: 12, fontWeight: 700, color: 'rgba(255,255,255,0.45)', margin: '14px 0 4px' }}>
-          History — {trackerLabel(activeTab)}
+          {trackerLabel(activeTab)} history
         </p>
         <AttributeTimeline cfg={cfg} type={activeTab} onEditEntry={entryId => onEditEntry(activeTab, entryId)} externalRef={externalRefs?.[activeTab]} />
       </div>
@@ -93,7 +93,7 @@ export default function AttributeHistory({ cfg, activeTab, onActiveTabChange, on
                   textAlign: 'left',
                 }}
               >
-                <span>{trackerLabel(type)} — {rows.length} {rows.length === 1 ? 'entry' : 'entries'}</span>
+                <span>{trackerLabel(type)} ({rows.length} {rows.length === 1 ? 'entry' : 'entries'})</span>
                 <span
                   style={{
                     color: 'rgba(255,255,255,0.45)',

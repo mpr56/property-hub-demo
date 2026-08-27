@@ -11,7 +11,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>Blue Hill Dashboard — Demo</title>
+        <title>Blue Hill Dashboard: Demo</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
         <meta
           name="description"

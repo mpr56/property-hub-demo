@@ -50,7 +50,7 @@ export default function AttributeTimeline({ cfg, type, onEditEntry, externalRef 
           <span style={{ display: 'block', fontWeight: 700, color: '#fff' }}>
             No {external.noun} of its own
           </span>
-          This property doesn&apos;t receive its own {external.noun} — it&apos;s billed under another property
+          This property doesn&apos;t receive its own {external.noun}, it&apos;s billed under another property
           {external.note ? (
             <>
               :{' '}
@@ -77,7 +77,7 @@ export default function AttributeTimeline({ cfg, type, onEditEntry, externalRef 
   if (rows.length === 0) {
     return (
       <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.4)', textAlign: 'center', padding: '20px 0' }}>
-        No history yet — entries you add will show up here.
+        No history yet. Entries you add will show up here.
       </p>
     );
   }
@@ -159,7 +159,7 @@ function buildGhost(cfg: PropertyConfig, type: TrackerType): Ghost | null {
     const overdue = isWaterEstimateOverdue(cfg);
     return {
       title: `~ Est. next bill · ${formatDate(d)}`,
-      subtitle: overdue ? 'Estimated date passed — bill not logged yet' : 'Rough estimate · ~3 months after last bill',
+      subtitle: overdue ? 'Estimated date passed, bill not logged yet' : 'Rough estimate · ~3 months after last bill',
       badge: overdue ? 'Overdue' : 'Est.',
       hex: overdue ? color.red : color.orange,
     };

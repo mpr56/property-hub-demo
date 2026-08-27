@@ -97,8 +97,8 @@ export default function TasksWidget({ propertyId }: { propertyId?: string }) {
         title={propertyId ? 'Linked tasks' : 'Tasks'}
         tasks={tasks}
         emptyText={propertyId
-          ? 'No tasks linked to this property — mention the street number and name (e.g. "24 Sandpiper") in a task to link it.'
-          : 'All clear — no open tasks.'}
+          ? 'No tasks linked to this property. Mention the street number and name (e.g. "24 Sandpiper") in a task to link it.'
+          : 'All clear, no open tasks.'}
       />
     </div>
   );

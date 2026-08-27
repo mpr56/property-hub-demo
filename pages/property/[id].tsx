@@ -177,12 +177,12 @@ export default function PropertyDetail() {
                 </h1>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 14, flexWrap: 'wrap' }}>
                   <StatusPill
-                    label={`Score ${Math.round(propertySeverityScore(cfg))} — ${ALERT_META[propertyAlertLevel(cfg)].label}`}
+                    label={`Score ${Math.round(propertySeverityScore(cfg))}: ${ALERT_META[propertyAlertLevel(cfg)].label}`}
                     hex={ALERT_META[propertyAlertLevel(cfg)].hex}
                   />
                   {cfg.dataIssue && <StatusPill label="Data issue flagged" hex="#f87171" />}
                   {(cfg.dwellingType === 'Dual Key' || cfg.dualKeyRole) && (
-                    cfg.dualKeyRole === 'primary' ? <StatusPill label="Dual key · Primary — notices arrive here" hex={color.sky} />
+                    cfg.dualKeyRole === 'primary' ? <StatusPill label="Dual key · Primary (notices arrive here)" hex={color.sky} />
                     : cfg.dualKeyRole === 'secondary' ? <StatusPill label="Dual key · Billed with primary" hex="#94a3b8" />
                     : <StatusPill label="Dual key · role not set" hex={color.orange} />
                   )}

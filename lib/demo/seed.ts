@@ -238,7 +238,7 @@ export function buildSeedProperties(): PropertyConfig[] {
       waterCategory: 'orange',
       owner: 'T. Brightwater',
       tenantedSince: months(-38),
-      notes: 'Owner handles council and water directly — we check in rather than forward.',
+      notes: 'Owner handles council and water directly; we check in rather than forward.',
       rates: [
         ratesEntry(LAST_Q, { amount: 498, paid: true, paidDate: days(-98), dueDate: days(-110), dateChecked: days(-105) }),
         ratesEntry(THIS_Q, { amount: 512, paid: true, paidDate: days(-6), dueDate: days(-4), dateChecked: days(-15) }),
@@ -288,7 +288,7 @@ export function buildSeedProperties(): PropertyConfig[] {
       owner: 'Hollowfield Holdings',
       tenantedSince: months(-31),
       dataIssue: true,
-      notes: 'Council record still lists the previous owner — rates notices arrive misaddressed. Chasing an update.',
+      notes: 'Council record still lists the previous owner, so rates notices arrive misaddressed. Chasing an update.',
       rates: [
         ratesEntry(LAST_Q, { amount: 470, paid: true, paidDate: days(-99), dueDate: days(-110) }),
         ratesEntry(THIS_Q, { amount: 470, paid: true, paidDate: days(-11), dueDate: days(-4), dateReceived: days(-35), dateForwarded: days(-31), notes: 'Arrived addressed to the previous owner again.' }),
@@ -358,7 +358,7 @@ export function buildSeedProperties(): PropertyConfig[] {
       council: 'Halloway Park Council',
       owner: 'C. Ravensdale',
       tenantedSince: months(-52),
-      notes: 'Shared water meter serves 8 Marlowe Street — reading is split manually each quarter.',
+      notes: 'Shared water meter serves 8 Marlowe Street; reading is split manually each quarter.',
       rates: [
         ratesEntry(LAST_Q, { amount: 505, paid: true, paidDate: days(-103), dueDate: days(-110) }),
         ratesEntry(THIS_Q, { amount: 517, paid: true, paidDate: days(-13), dueDate: days(-4), dateReceived: days(-34), dateForwarded: days(-30) }),
@@ -408,7 +408,7 @@ export function buildSeedProperties(): PropertyConfig[] {
       dualKeyWaterShared: true,
       owner: 'N. Ellery',
       tenantedSince: months(-6),
-      notes: 'Billed under 1/24 Sandpiper Close — tracked there, silent here.',
+      notes: 'Billed under 1/24 Sandpiper Close; tracked there, silent here.',
       lease: [leaseEntry({ startDate: months(-6), endDate: months(18), rent: 455, tenant: 'Y. Abebe' })],
       inspection: [inspectionEntry({ dueDate: days(-50), completedDate: days(-48), result: 'pass', provider: 'Kellerton Property Services' })],
       termite: [inspectionEntry({ dueDate: days(-260), completedDate: days(-258), result: 'pass', provider: 'Barrier Pest Control' })],
@@ -425,7 +425,7 @@ export function buildSeedProperties(): PropertyConfig[] {
       waterExternalBillNote: '62 Rosalind Way',
       owner: 'C. Ravensdale',
       tenantedSince: months(-28),
-      notes: 'No separate water meter — the bill arrives against 62 Rosalind Way.',
+      notes: 'No separate water meter; the bill arrives against 62 Rosalind Way.',
       rates: [
         ratesEntry(LAST_Q, { amount: 445, paid: true, paidDate: days(-107), dueDate: days(-110) }),
         ratesEntry(THIS_Q, { amount: 459, paid: true, paidDate: days(-15), dueDate: days(-4), dateReceived: days(-33), dateForwarded: days(-31) }),
@@ -512,7 +512,7 @@ export function buildSeedProperties(): PropertyConfig[] {
       termiteApplicable: false,
       owner: 'S. Thorneycroft',
       tenantedSince: null,
-      notes: 'Just onboarded — awaiting the first rates notice and a managing agreement.',
+      notes: 'Just onboarded, awaiting the first rates notice and a managing agreement.',
       createdAt: stamp(6),
       activity: [activity(6, 'Property created')],
     }),
@@ -556,27 +556,27 @@ export function buildSeedTasks(): SeedTask[] {
 
   return [
     t({
-      title: 'Chase council on the overdue instalment — 12 Harrowgate',
+      title: 'Chase council on the overdue instalment for 12 Harrowgate',
       notes: 'Forwarded to the owner weeks ago, still showing unpaid on the council portal.',
       due: days(-3),
-      emailSubject: 'Rates notice — 12 Harrowgate Street',
+      emailSubject: 'Rates notice: 12 Harrowgate Street',
       updated: stamp(1),
     }),
     t({
       title: 'Get treatment quote for 4 Kestrel after the failed termite report',
       notes: 'Barrier Pest Control found active workings in the rear fence line.',
       due: days(1),
-      emailSubject: 'Termite inspection report — 4 Kestrel Ave',
+      emailSubject: 'Termite inspection report: 4 Kestrel Ave',
       updated: stamp(1),
     }),
     t({
       title: 'Draft renewal offer for 9 Coppersmith Lane',
-      notes: 'Lease ends in about two and a half months — owner wants a modest increase.',
+      notes: 'Lease ends in about two and a half months; owner wants a modest increase.',
       due: days(5),
       updated: stamp(2),
     }),
     t({
-      title: 'Send lease renewal pack — 17 Palladine Court',
+      title: 'Send lease renewal pack for 17 Palladine Court',
       due: days(12),
       updated: stamp(4),
     }),
@@ -584,13 +584,13 @@ export function buildSeedTasks(): SeedTask[] {
       // Names exactly one property: lib/taskLinking.ts returns null on a tie, so
       // a note mentioning a second address here would leave the task unlinked.
       title: 'Split the shared water reading for 62 Rosalind Way',
-      notes: 'Meter serves the adjoining lot too — split it manually before invoicing.',
+      notes: 'Meter serves the adjoining lot too; split it manually before invoicing.',
       due: days(2),
       updated: stamp(2),
     }),
     t({
       title: 'Prepare quarterly owner statements',
-      notes: 'Whole portfolio — no single property.',
+      notes: 'Whole portfolio; no single property.',
       due: days(9),
       updated: stamp(5),
     }),

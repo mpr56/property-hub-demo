@@ -26,9 +26,9 @@ export default function DualKeyFields({ role, onRoleChange, ratesShared, onRates
           value={role ?? ''}
           onChange={e => onRoleChange((e.target.value || null) as DualKeyRole | null)}
         >
-          <option value="">Not set — alerts behave as normal</option>
-          <option value="primary">Primary — notices arrive under this address</option>
-          <option value="secondary">Secondary — billed with the primary unit</option>
+          <option value="">Not set (alerts behave as normal)</option>
+          <option value="primary">Primary (notices arrive under this address)</option>
+          <option value="secondary">Secondary (billed with the primary unit)</option>
         </select>
       </div>
       {role === 'secondary' && (

@@ -282,7 +282,7 @@ export default function Home() {
               <button
                 onClick={toggleBgMode}
                 aria-pressed={bgMode === 'status'}
-                title={bgMode === 'status' ? 'Background: status colours — click for static' : 'Background: static — click for status colours'}
+                title={bgMode === 'status' ? 'Background: status colours (click for static)' : 'Background: static (click for status colours)'}
                 style={{
                   width: 46, height: 46, borderRadius: 14, color: '#fff',
                   background: `linear-gradient(135deg, ${color.sky} 0%, ${color.skyDeep} 100%)`,
@@ -327,7 +327,7 @@ export default function Home() {
             neutralValue
             onClick={resetFilters}
             active={showingAll}
-            title={showingAll ? 'Showing all properties' : 'Show all properties — clear filters'}
+            title={showingAll ? 'Showing all properties' : 'Show all properties (clear filters)'}
           />
           <StatCard
             label="Needs attention"
@@ -352,7 +352,7 @@ export default function Home() {
             icon="file-text"
             onClick={() => selectTile('lease')}
             active={filterLeaseExpiring}
-            title={filterLeaseExpiring ? 'Showing leases expiring — click to clear' : 'Show leases expiring within ~3 months'}
+            title={filterLeaseExpiring ? 'Showing leases expiring (click to clear)' : 'Show leases expiring within ~3 months'}
           />
         </div>
 
@@ -430,7 +430,7 @@ export default function Home() {
           {properties !== null && filtered.length === 0 && (
             <GlassSurface borderRadius={16} backgroundOpacity={0.04} style={{ padding: 40, textAlign: 'center' }}>
               <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.4)' }}>
-                {properties.length === 0 ? 'No properties yet — add your first one to get started.' : 'Nothing matches these filters.'}
+                {properties.length === 0 ? 'No properties yet. Add your first one to get started.' : 'Nothing matches these filters.'}
               </p>
             </GlassSurface>
           )}
@@ -514,7 +514,7 @@ function StatCard({ label, value, hex, icon, neutralValue = false, onClick, acti
     <button
       onClick={onClick}
       aria-pressed={active}
-      title={title ?? (active ? `${label}: showing only these — click to clear` : `Show only ${label.toLowerCase()}`)}
+      title={title ?? (active ? `${label}: showing only these (click to clear)` : `Show only ${label.toLowerCase()}`)}
       style={{ display: 'block', width: '100%', textAlign: 'left', background: 'none', border: 'none', padding: 0, cursor: 'pointer', font: 'inherit', color: 'inherit' }}
     >
       {surface}
