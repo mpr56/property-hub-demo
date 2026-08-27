@@ -87,7 +87,7 @@ export default function DemoBanner() {
         </span>
 
         <p style={{ flex: 1, minWidth: 0, fontSize: 12.5, lineHeight: 1.45, color: 'rgba(255,255,255,0.72)' }}>
-          Sample data, no backend. Edit anything you like — it all works, and it all resets when you reload.
+          This is a demo with sample data as the real version has sensitive data. All features works, yet it all resets when you reload.
         </p>
 
         <button
